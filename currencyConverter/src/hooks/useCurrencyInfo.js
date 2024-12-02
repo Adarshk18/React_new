@@ -1,15 +1,25 @@
-import {useEffect,useState} from "react"
+import { useEffect, useState } from "react";
 
-function useCurrencyInfo(currency){
-    const [data,setData] = useState({});
+function useCurrencyInfo(currency) {
+    const [data, setData] = useState({}); // Ensure an initial empty object
+    const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
-        .then((res)=> res.json())
-        .then((res) => setData(res[currency]))
-    },[currency])
-    return data
+    useEffect(() => {
+        setLoading(true);
+        fetch(`https://open.er-api.com/v6/latest/${currency}`)
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.rates) {
+                    setData(res.rates); // Use `res.rates` directly
+                } else {
+                    setData({});
+                }
+            })
+            .catch(() => setData({})) // Handle errors gracefully
+            .finally(() => setLoading(false));
+    }, [currency]);
 
+    return { data, loading };
 }
 
 export default useCurrencyInfo;
