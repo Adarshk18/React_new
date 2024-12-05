@@ -1,18 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import Login from './components/Login'
-import Profile from './components/Profile'
+import React from "react";
+import UserContextProvider from "./context/userContextProvider";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <userContextProvider>
+    <UserContextProvider>
       <h1>Context API</h1>
-      <Login/>
-      <Profile/>
-    </userContextProvider>
-  )
+      <Login />
+      <Profile />
+    </UserContextProvider>
+  );
 }
 
-export default App
+export default App;

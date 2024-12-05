@@ -1,12 +1,5 @@
-import React from "react";
+import { createContext } from "react";
 
-const userContext = React.createContext()
+const userContext = createContext(null);
 
 export default userContext;
-
-<userContext>
-<Login/>
-<Card>
-    <Data/>
-</Card>
-</userContext>
